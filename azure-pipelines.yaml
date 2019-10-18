@@ -28,7 +28,7 @@ stages:
         vmImage: 'ubuntu-latest'
       steps:
         - task: AzureResourceGroupDeployment@2
-          name: 'deployACR'
+          name: 'deploy_acr'
           displayName: 'Deploy Azure Container Registry'
           enabled: true
           inputs:
@@ -43,7 +43,7 @@ stages:
             outputVariable: acrTemplateOutput
         
         - task: ARM Outputs@5
-          name: 'ACRDeploymentOutput'
+          name: 'acr_deployment_output'
           displayName: 'Get ACR Deployment Output'
           enabled: true
           inputs:
@@ -56,7 +56,7 @@ stages:
     - job: 'customer_api_container_build_job'
       dependsOn: 'acr_create_job'
       variables:
-        registryName: $[ dependencies.deployACR.outputs['ACRDeploymentOutput.registryName'] ]
+        acrName: $[ dependencies.acr_create_job.outputs['acr_create_job.acr_deployment_output.registryName'] ]
       pool:
         vmImage: 'ubuntu-latest'
       steps:
@@ -72,7 +72,7 @@ stages:
           inputs:
             azureSubscription: $(serviceConnection)
             scriptLocation: inlineScript
-            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/customer/Dockerfile ./api/customer
+            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./api/customer/Dockerfile ./api/customer
 
     - job: 'product_api_container_build_job'
       dependsOn: 'acr_create_job'
