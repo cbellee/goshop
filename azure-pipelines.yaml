@@ -126,8 +126,7 @@ stages:
   displayName: 'dev release'
   variables:
     environmentName: dev
-    projectName: $(environmentName)-aks
-    resourceGroupName: "$(projectName)-rg"
+    resourceGroupName: $(project)-$(environmentName)-aks-rg
     tags: '{"costCentre":"478132","project":"$(projectName)"}'
   jobs:
     - deployment: 
@@ -235,11 +234,10 @@ stages:
               scriptLocation: scriptPath
               scriptPath: ./scripts/install-apps.sh
 - stage: 'test'
-  displayName: 'test environment release'
+  displayName: 'test release'
   variables:
-    environmentName: test
-    projectName: aks-$(environmentName)
-    resourceGroupName: "$(projectName)-rg"
+    environmentName: tst
+    resourceGroupName: $(project)-$(environmentName)-aks-rg
     tags: '{"costCentre":"478132","project":"$(projectName)"}'
   jobs:
     - deployment: 
