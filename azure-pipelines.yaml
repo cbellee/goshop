@@ -54,6 +54,9 @@ stages:
             deploymentNameFilter: "acrDeployment-$(timeStamp)"
 
     - job: 'customer_api_container_build_job'
+      dependsOn: 'deployACR'
+      variables:
+        registryName: $[ dependencies.deployACR.outputs['deployACR.registryName'] ]
       pool:
         vmImage: 'ubuntu-latest'
       steps:
@@ -66,6 +69,9 @@ stages:
             inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/customer/Dockerfile ./api/customer
 
     - job: 'product_api_container_build_job'
+      dependsOn: 'deployACR'
+      variables:
+        registryName: $[ dependencies.deployACR.outputs['deployACR.registryName'] ]
       pool:
         vmImage: 'ubuntu-latest'
       steps:    
@@ -78,6 +84,9 @@ stages:
             inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/product/Dockerfile ./api/product
 
     - job: 'order_api_container_build_job'
+      dependsOn: 'deployACR'
+      variables:
+        registryName: $[ dependencies.deployACR.outputs['deployACR.registryName'] ]
       pool:
         vmImage: 'ubuntu-latest'
       steps:
@@ -90,6 +99,9 @@ stages:
             inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/order/Dockerfile ./api/order
 
     - job: 'angular_container_build_job'
+      dependsOn: 'deployACR'
+      variables:
+        registryName: $[ dependencies.deployACR.outputs['deployACR.registryName'] ]
       pool:
         vmImage: 'ubuntu-latest'
       steps:
