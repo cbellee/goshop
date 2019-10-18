@@ -53,6 +53,10 @@ stages:
             whenLastDeploymentIsFailed: 'fail'
             deploymentNameFilter: "acrDeployment-$(timeStamp)"
 
+    - job: 'customer_api_container_build_job'
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
         - task: AzureCLI@1
           displayName: 'Build customer api container image in ACR'
           enabled: true
@@ -60,7 +64,11 @@ stages:
             azureSubscription: $(serviceConnection)
             scriptLocation: inlineScript
             inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/customer/Dockerfile ./api/customer
-        
+
+    - job: 'product_api_container_build_job'
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:    
         - task: AzureCLI@1
           displayName: 'Build product api container image in ACR'
           enabled: true
@@ -69,6 +77,10 @@ stages:
             scriptLocation: inlineScript
             inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/product/Dockerfile ./api/product
 
+    - job: 'order_api_container_build_job'
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
         - task: AzureCLI@1
           displayName: 'Build order api container image in ACR'
           enabled: true
@@ -77,6 +89,10 @@ stages:
             scriptLocation: inlineScript
             inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/order/Dockerfile ./api/order
 
+    - job: 'angular-ui_container_build_job'
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
         - task: AzureCLI@1
           displayName: 'Build Angular ui container image in ACR'
           enabled: true
