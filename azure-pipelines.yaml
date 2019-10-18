@@ -53,10 +53,13 @@ stages:
             whenLastDeploymentIsFailed: 'fail'
             deploymentNameFilter: "acrDeployment-$(timeStamp)"
 
+        - script:  echo "##vso[task.setvariable variable=acrName;isOutput=true]$(registryName)"
+          name: acr_job_output
+
     - job: 'customer_api_container_build_job'
       dependsOn: 'acr_create_job'
       variables:
-        acrName: $[ dependencies.acr_create_job.outputs['acr_create_job.acr_deployment_output.registryName'] ]
+        acrName: $[dependencies.acr_create_job.outputs['acr_job_output.acrName']]
       pool:
         vmImage: 'ubuntu-latest'
       steps:
