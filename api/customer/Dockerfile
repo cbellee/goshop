@@ -1,7 +1,7 @@
 # build image
 FROM golang:alpine as builder
 RUN apk update && apk add --no-cache git
-#WORKDIR /
+WORKDIR /
 ENV GO111MODULE=on
 COPY . .
 RUN go get -d -v \
