@@ -14,8 +14,8 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates \
   && mkdir /app
 WORKDIR /app
-COPY --from=builder /orderservice .
-COPY --from=builder /seed_data.json .
+COPY --from=builder /app/orderservice .
+COPY --from=builder /app/seed_data.json .
 
 # Metadata params
 ARG VERSION

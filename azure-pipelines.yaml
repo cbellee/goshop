@@ -54,7 +54,7 @@ stages:
             deploymentNameFilter: "acrDeployment-$(timeStamp)"
 
         - task: AzureCLI@1
-          displayName: 'Build customer api container images in ACR'
+          displayName: 'Build customer api container image in ACR'
           enabled: true
           inputs:
             azureSubscription: $(serviceConnection)
@@ -62,7 +62,7 @@ stages:
             inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/customer/Dockerfile ./api/customer
         
         - task: AzureCLI@1
-          displayName: 'Build product api container images in ACR'
+          displayName: 'Build product api container image in ACR'
           enabled: true
           inputs:
             azureSubscription: $(serviceConnection)
@@ -70,25 +70,20 @@ stages:
             inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/product/Dockerfile ./api/product
 
         - task: AzureCLI@1
-          displayName: 'Build order api container images in ACR'
+          displayName: 'Build order api container image in ACR'
           enabled: true
           inputs:
             azureSubscription: $(serviceConnection)
             scriptLocation: inlineScript
             inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/order/Dockerfile ./api/order
 
-        - task: NodeTool@0
-          name: node_install
+        - task: AzureCLI@1
+          displayName: 'Build Angular ui container image in ACR'
+          enabled: true
           inputs:
-            versionSpec: '10.x'
-          displayName: 'Install Node.js'
-
-        - script: |
-              npm install -g @angular/cli
-              npm install
-              ng build --prod
-          displayName: 'npm install and build'
-          name: node_install_build
+            azureSubscription: $(serviceConnection)
+            scriptLocation: inlineScript
+            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./ui/Dockerfile ./gui
 
 - stage: 'dev'
   displayName: 'dev release'
