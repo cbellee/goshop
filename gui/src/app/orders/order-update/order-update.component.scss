@@ -1,0 +1,18 @@
+dl {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 100px 100px;
+}
+
+dt {
+  font-weight: bold;
+  padding: 5px;
+  margin: 0;
+  float: left;
+}
+
+dd {
+  padding: 5px;
+  margin: 0;
+  float: left;
+}

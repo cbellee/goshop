@@ -1,0 +1,20 @@
+<mat-card class="example-container container mat-elevation-z8">
+  <header mat-card-header>
+    <!-- Header content -->
+  </header>
+  <nav>
+    <img mat-card src="{{product?.imageurl}}">
+  </nav>
+  <main>
+    <mat-card-title>
+      <h3>{{product?.album}}</h3>
+      <h4>{{product?.artist}} ({{product?.releaseyear}})</h4>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <div>{{product?.description}}</div>
+    </mat-card-subtitle>
+  </main>
+  <footer mat-card-subtitle>
+    <div>CD ${{product?.price?.cd}} / LP ${{product?.price?.lp}} / DL ${{product?.price?.mp3}}</div>
+  </footer>
+</mat-card>

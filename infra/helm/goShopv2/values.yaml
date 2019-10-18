@@ -1,0 +1,23 @@
+global:
+  cosmosDbHostSuffix: documents.azure.com
+  cosmosDbHostName: null
+  cosmosDbName: goShopDb
+  cosmosDbPassword: null
+  registryName: null
+  appHostName: null
+
+productApi:
+  productServiceVersion: 1.0.0
+  productServiceImageName: cbellee/goshop-productservice
+
+customerApi:
+  customerServiceVersion: 1.0.0
+  customerServiceImageName: cbellee/goshop-customerservice
+
+orderApi:
+  orderServiceVersion: 1.0.0
+  orderServiceImageName: cbellee/goshop-orderservice
+
+webUI:
+  webUIVersion: 1.0.0
+  webUIImageName: cbellee/goshop-webui

@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1000,
+        "album": "Music Has the Right to Children",
+        "artist": "Boards of Canada",
+        "releaseYear": "1998",
+        "description": "Music Has the Right to Children is the debut studio album by Scottish electronic music duo Boards of Canada. It was released on 20 April 1998 in the United Kingdom by Warp and Skam Records and in the United States by Matador Records.",
+        "createdAt": "2012-06-04T01:48:27+10:00",
+        "updatedAt": "2012-06-04T01:48:27+10:00",
+        "price": {
+            "cd": 12.99,
+            "lp": 14.99,
+            "mp3": 8.99
+        },
+        "imageUrl": "https://goshopstor6c62.blob.core.windows.net/images/musichastherighttochildren.jpg"
+    },
+    {
+        "id": 1001,
+        "album": "Geogaddi",
+        "artist": "Boards of Canada",
+        "releaseYear": "2002",
+        "description": "Geogaddi is the second album by Scottish electronic music duo Boards of Canada, released on 13 February 2002 by Warp. It has been described as pursuing a darker variation of the style established on their previous releases.",
+        "createdAt": "2011-07-04T07:12:33+10:00",
+        "updatedAt": "2011-07-04T07:12:33+10:00",
+        "price": {
+            "cd": 12.99,
+            "lp": 14.99,
+            "mp3": 8.99
+        },
+        "imageUrl": "https://goshopstor6c62.blob.core.windows.net/images/geogaddi.jpg"
+    },
+    {
+        "id": 1002,
+        "album": "The Campfire Headphase",
+        "artist": "Boards of Canada",
+        "releaseYear": "2005",
+        "description": "The Campfire Headphase is the third studio album by Boards of Canada. Released by Warp Records in October 2005, the album featured the addition of more organic musical elements, including heavily treated acoustic guitars and more conventional song structures.",
+        "createdAt": "2011-07-04T07:12:33+10:00",
+        "updatedAt": "2011-07-04T07:12:33+10:00",
+        "price": {
+            "cd": 12.99,
+            "lp": 14.99,
+            "mp3": 8.99
+        },
+        "imageUrl": "https://goshopstor6c62.blob.core.windows.net/images/thecampfireheadphase.jpg"
+    },
+    {
+        "id": 1003,
+        "album": "Tomorrow's Harvest",
+        "artist": "Boards of Canada",
+        "releaseYear": "2013",
+        "description": "Tomorrow's Harvest is the fourth studio album by Scottish electronic music duo Boards of Canada, released on 5 June 2013 by Warp. The duo began composing and recording the album following the release of The Campfire Headphase in 2005 and the expansion of their studio at Hexagon Sun near the Pentland Hills.",
+        "createdAt": "2014-10-05T12:12:12+10:00",
+        "updatedAt": "2014-10-05T12:12:12+10:00",
+        "price": {
+            "cd": 12.99,
+            "lp": 14.99,
+            "mp3": 8.99
+        },
+        "imageUrl": "https://goshopstor6c62.blob.core.windows.net/images/tomorrowsharvest.jpg"
+    }
+]

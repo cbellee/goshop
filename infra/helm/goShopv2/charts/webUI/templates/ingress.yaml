@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: webui-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - host: goshop-dev.kainiindustries.net 
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: webui
+          servicePort: 80
+      - path: /product
+        backend:
+          serviceName: productapi-service
+          servicePort: 8080
+      - path: /customer
+        backend:
+          serviceName: customerapi-service
+          servicePort: 8081
+      - path: /order
+        backend:
+          serviceName: orderapi-service
+          servicePort: 8082

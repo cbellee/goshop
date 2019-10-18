@@ -1,0 +1,38 @@
+<mat-card>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="OrdersDataSource">
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/orders/', row.id]"></mat-row>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell class="id-cell" *matHeaderCellDef>Id</mat-header-cell>
+        <mat-cell *matCellDef="let order">{{order.id}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="customerid">
+        <mat-header-cell class="customerId-cell" *matHeaderCellDef>CustomerId</mat-header-cell>
+        <mat-cell *matCellDef="let order">{{order.customerid}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="createdat">
+        <mat-header-cell class="createdAt-cell" *matHeaderCellDef>Created</mat-header-cell>
+        <mat-cell *matCellDef="let order">{{order.createdat | date}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="updatedat">
+        <mat-header-cell class="updatedAt-cell" *matHeaderCellDef>Updated</mat-header-cell>
+        <mat-cell *matCellDef="let order">{{order.updatedat | date}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="items">
+        <mat-header-cell class="items-cell" *matHeaderCellDef># Items</mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          <tr>
+            {{order.items.length}}
+          </tr>
+        </mat-cell>
+      </ng-container>
+    </table>
+  </div>
+</mat-card>

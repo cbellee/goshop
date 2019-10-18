@@ -1,0 +1,10 @@
+{
+  "kind": "Namespace",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "goshop-dev",
+    "labels": {
+      "name": "goshop-dev"
+    }
+  }
+}

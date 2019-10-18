@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webui
+  template:
+    metadata:
+      labels:
+        app: webui
+    spec:
+      containers:
+      - name: webui
+        image: "{{ .Values.registryName }}/{{ .Values.webUIImageName }}:{{ .Values.webUIVersion }}"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: acr-auth

@@ -1,0 +1,29 @@
+[
+   {
+      "id": 3000,
+      "customerid": 2000,
+      "total": 34.97,
+      "items": [
+         {
+            "id": 1000,
+            "quantity": 1,
+            "format": "mp3",
+            "isbackordered": false,
+            "unitprice": 8.99
+         },
+         {
+            "id": 1001,
+            "quantity": 2,
+            "format": "cd",
+            "isbackordered": false,
+            "unitprice": 12.99
+         }
+      ],
+      "updatedat": {
+         "$date": 1506717363000
+      },
+      "createdat": {
+         "$date": 1465004907000
+      }
+   }
+]

@@ -1,0 +1,36 @@
+<mat-card>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="ProductsDataSource" matSort matSortActive="album" matSortDisableClear
+      matSortDirection="asc">
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/products/', row.id]"></mat-row>
+
+      <ng-container matColumnDef="image">
+        <mat-header-cell class="image-cell" *matHeaderCellDef>Cover</mat-header-cell>
+        <mat-cell *matCellDef="let product"> <img [src]="product.imageurl"> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="artist">
+        <mat-header-cell class="artist-cell" *matHeaderCellDef>Artist</mat-header-cell>
+        <mat-cell *matCellDef="let product">{{product.artist}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="album">
+        <mat-header-cell class="album-cell" *matHeaderCellDef>Album</mat-header-cell>
+        <mat-cell *matCellDef="let product">{{product.album}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="releaseyear">
+          <mat-header-cell class="year-cell" *matHeaderCellDef>Released</mat-header-cell>
+          <mat-cell *matCellDef="let product">{{product.releaseyear}}</mat-cell>
+        </ng-container>
+
+      <ng-container matColumnDef="price">
+        <mat-header-cell class="price-cell" *matHeaderCellDef>Price cd | lp | mp3</mat-header-cell>
+        <mat-cell *matCellDef="let product">${{product.price.cd}} / ${{product.price.lp}} / ${{product.price.mp3}}
+        </mat-cell>
+      </ng-container>
+    </table>
+  </div>
+</mat-card>

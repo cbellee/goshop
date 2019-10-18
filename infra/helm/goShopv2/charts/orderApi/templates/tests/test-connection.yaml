@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "orderApi.fullname" . }}-test-connection"
+  labels:
+    app.kubernetes.io/name: {{ include "orderApi.name" . }}
+    helm.sh/chart: {{ include "orderApi.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args:  ['{{ include "orderApi.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

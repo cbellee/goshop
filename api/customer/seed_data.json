@@ -1,0 +1,66 @@
+[
+   {
+      "id": 2000,
+      "email": "christian.bellee@gmail.com",
+      "firstName": "Christian",
+      "lastName": "Bellee",
+      "middleName": "Michael",
+      "title": "Mr.",
+      "phone": {
+         "home": "9868445231",
+         "mobile": "0404272365",
+         "work": "997813642"
+      },
+      "addresses": [
+         {
+            "isshippingaddress": true,
+            "streetaddress": "19 Hanover Avenue",
+            "suburb": "North Epping",
+            "postcode": "2121",
+            "city": "Sydney",
+            "state": "NSW",
+            "country": "Australia",
+            "countycode": "AU"
+         },
+         {
+            "isshippingaddress": false,
+            "streetaddress": "18 Boundary Road",
+            "suburb": "North Epping",
+            "postcode": "2121",
+            "city": "Sydney",
+            "state": "NSW",
+            "country": "Australia",
+            "countycode": "AU"
+         }
+      ],
+      "createdat": "2016-06-04T11:48:27+10:00",
+      "updatedat": "2017-09-30T06:36:03+10:00"
+   },
+   {
+      "id": 2001,
+      "email": "john.doe@gmail.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "middleName": "David",
+      "title": "Mr.",
+      "phone": {
+         "home": "9868445231",
+         "mobile": "0404272365",
+         "work": "997813642"
+      },
+      "addresses": [
+         {
+            "isshippingaddress": true,
+            "streetaddress": "45 Acacia Avenue",
+            "suburb": "North Ryde",
+            "postcode": "2134",
+            "city": "Sydney",
+            "state": "NSW",
+            "country": "Australia",
+            "countycode": "AU"
+         }
+      ],
+      "createdat": "2017-06-04T17:23:56+10:00",
+      "updatedat": "2018-09-30T08:12:01+10:00"
+   }
+]

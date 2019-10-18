@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orderapi
+  template:
+    metadata:
+      labels:
+        app: orderapi
+    spec:
+      containers:
+      - name: orderapi
+        image: "{{ .Values.registryName }}/{{ .Values.orderServiceImageName }}:{{ .Values.orderServiceVersion }}"
+        command: ["./orderService"]
+        args: ["serve"]
+        env:
+        - name: APP_DB_PASSWORD
+          value: {{ .Values.cosmosDbPassword }}
+        - name: APP_DB_NAME
+          value: {{ .Values.cosmosDbName }}
+        - name: APP_DB_HOST_SUFFIX
+          value: {{ .Values.cosmosDbHostSuffix }}
+        - name: APP_DB_HOST_NAME
+          value: {{ .Values.cosmosDbHostName }}
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: acr-auth
+        

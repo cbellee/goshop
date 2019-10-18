@@ -1,0 +1,37 @@
+<mat-card class="example-container mat-elevation-z8">
+  <div class="cardInner">
+    <mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>Order Details</h3>
+        </mat-card-title>
+        <mat-card-subtitle>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <dl>
+        <dt>id</dt>
+        <dd>{{order?.id}}</dd>
+        <dt>email</dt>
+        <dd>{{customer?.email}}</dd>
+        <dt>Created</dt>
+        <dd>{{order?.createdat | date}}</dd>
+        <dt>Order Total</dt>
+        <dd>${{order?.total}}</dd>
+      </dl>
+      <dl *ngFor="let orderitem of order?.items">
+        <dt>Item Id</dt>
+        <dd>{{orderitem?.id}}</dd>
+        <dt>Quantity</dt>
+        <dd>{{orderitem?.quantity}}</dd>
+        <dt>Format</dt>
+        <dd>{{orderitem?.format}}</dd>
+        <dt>Back Ordered</dt>
+        <dd>{{orderitem?.isbackordered}}</dd>
+        <dt>Unit Price</dt>
+        <dd>${{orderitem?.unitprice}}</dd>
+        <dt>Sub Total</dt>
+        <dd>${{orderitem?.subTotal}}</dd>
+      </dl>
+    </mat-card-content>
+  </div>
+</mat-card>

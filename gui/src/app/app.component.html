@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" class="mat-elevation-z8">
+  <img src="../assets/logo.png" width="40px">
+</mat-toolbar>
+
+<nav mat-tab-nav-bar>
+  <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive"
+    [active]="rla.isActive" [routerLinkActiveOptions]="{exact:true}">{{link.label}}
+  </a>
+</nav>
+
+<div>
+  <router-outlet></router-outlet>
+</div>

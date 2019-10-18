@@ -1,0 +1,54 @@
+version: '3.3'
+services:
+  #webui:
+  #  env_file: variables.env
+  #  image: webui:0.1.0
+  #  build:
+  #    context: ../goShop-webUI
+  #    dockerfile: Dockerfile.dev
+  #  ports:
+  #    - 80:80 
+  productservice:
+    env_file: variables.env
+    image: productservice:0.1.0
+    build:
+      context: ../goShop-productService
+      dockerfile: Dockerfile
+    depends_on: 
+      - mongo
+    command: ["serve"]
+    ports:
+      - 8080:80
+  customerservice:
+    env_file: variables.env
+    image: customerservice:0.1.0
+    build:
+      context: ../goShop-customerService
+      dockerfile: Dockerfile
+    depends_on: 
+      - mongo
+    command: ["serve"]
+    ports:
+      - 8081:80
+  orderservice:
+    env_file: variables.env
+    image: orderservice:0.1.0
+    build:
+      context: ../goShop-orderService
+      dockerfile: Dockerfile
+    depends_on: 
+      - mongo
+    command: ["serve"]
+    ports:
+      - 8082:80
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    #volumes: 
+    #  - ./mongodb:/data/db
+    #  - ./mongodb_config:/data/configdb
+#volumes: 
+#  mongodb:
+     

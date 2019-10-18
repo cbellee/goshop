@@ -1,0 +1,12 @@
+# binary name
+typical-go-server
+my-project
+
+# dependencies folder exclusion
+#/vendor
+
+# local environment variable
+.envrc
+
+# testing
+cover.out

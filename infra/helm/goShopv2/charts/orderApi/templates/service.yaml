@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: orderapi-service
+spec:
+  selector:
+    app: orderapi
+  ports:
+  - protocol: TCP
+    port: 8082
+    targetPort: 80

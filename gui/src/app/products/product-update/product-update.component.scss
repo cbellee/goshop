@@ -1,0 +1,74 @@
+.container {
+  display: grid;
+
+  grid-template-areas:
+    "header header"
+    "nav content"
+    "footer footer";
+
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  grid-gap: 20px;
+}
+
+mat-card img {
+  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+  width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 100%;
+  float: left;
+  border-radius: 0.3em;
+  border: 1px solid lightgrey;
+}
+
+header {
+  grid-area: header;
+}
+
+nav {
+  grid-area: nav;
+  margin-left: 0.5rem;
+}
+
+main {
+  grid-area: content;
+}
+
+footer {
+  grid-area: footer;
+  margin-left: 0.5rem;
+}
+
+h2 {
+  margin: 0px;
+  padding-bottom: 5px;
+}
+
+h3 {
+  margin: 0px;
+  padding-bottom: 5px;
+}
+
+h4 {
+  margin: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+mat-card-subtitle {
+  padding-top: 20px;
+}
+
+dl {
+  float: right;
+  display: grid;
+  grid-template-columns: auto auto;
+  bottom: 0;
+}
+
+dt {
+  font-weight: bold;
+  padding: 1px;
+}
+
+dd {
+}

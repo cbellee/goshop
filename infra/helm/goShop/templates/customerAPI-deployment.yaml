@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customerapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customerapi
+  template:
+    metadata:
+      labels:
+        app: customerapi
+    spec:
+      containers:
+      - name: customerapi
+        image: "{{ .Values.registryName }}/{{ .Values.customerServiceImageName }}:{{ .Values.customerServiceVersion }}"
+        command: ["./customerService"]
+        args: ["serve"]
+        env:
+        - name: APP_DB_PASSWORD
+          value: {{ .Values.cosmosDbPassword }}
+        - name: APP_DB_NAME
+          value: {{ .Values.cosmosDbName }}
+        - name: APP_DB_HOST_SUFFIX
+          value: {{ .Values.cosmosDbHostSuffix }}
+        - name: APP_DB_HOST_NAME
+          value: {{ .Values.cosmosDbHostName }}
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: acr-auth
+        

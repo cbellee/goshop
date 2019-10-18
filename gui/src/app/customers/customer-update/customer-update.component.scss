@@ -1,0 +1,17 @@
+dl {
+  display: grid;
+  width: 50%;
+  grid-template-columns: auto auto;
+  border-radius: 4px;
+}
+
+dt {
+  font-weight: bold;
+  padding: 10px;
+}
+
+dd {
+  padding: 10px;
+  margin: 0;
+  float: left;
+}

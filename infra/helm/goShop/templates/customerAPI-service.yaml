@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: customerapi-service
+spec:
+  selector:
+    app: customerapi
+  ports:
+  - protocol: TCP
+    port: 8081
+    targetPort: 80

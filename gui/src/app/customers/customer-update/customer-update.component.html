@@ -1,0 +1,51 @@
+<mat-card class="example-container mat-elevation-z8">
+  <div class="cardInner">
+    <mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>Customer Details</h3>
+        </mat-card-title>
+        <mat-card-subtitle>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <dl>
+        <dt>id</dt>
+        <dd>{{customer?.id}}</dd>
+        <dt>email</dt>
+        <dd>{{customer?.email}}</dd>
+        <dt>title</dt>
+        <dd>{{customer?.title}}</dd>
+        <dt>first name</dt>
+        <dd>{{customer?.firstname}}</dd>
+        <dt>last name</dt>
+        <dd>{{customer?.lastname}}</dd>
+      </dl>
+      <dl>
+        <dt>home phone</dt>
+        <dd>{{customer?.phone?.home}}</dd>
+        <dt>work phone</dt>
+        <dd>{{customer?.phone?.work}}</dd>
+        <dt>mobile phone</dt>
+        <dd>{{customer?.phone?.mobile}}</dd>
+      </dl>
+      <dl *ngFor="let address of customer?.addresses">
+        <dt>shipping address</dt>
+        <dd>{{address?.isshippingaddress}}</dd>
+        <dt>street address</dt>
+        <dd>{{address?.streetaddress}}</dd>
+        <dt>suburb</dt>
+        <dd>{{address?.suburb}}</dd>
+        <dt>postcode</dt>
+        <dd>{{address?.postcode}}</dd>
+        <dt>city</dt>
+        <dd>{{address?.city}}</dd>
+        <dt>state</dt>
+        <dd>{{address?.state}}</dd>
+        <dt>country</dt>
+        <dd>{{address?.country}}</dd>
+        <dt>country code</dt>
+        <dd>{{address?.countrycode}}</dd>
+      </dl>
+    </mat-card-content>
+  </div>
+</mat-card>
