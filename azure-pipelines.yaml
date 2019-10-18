@@ -158,6 +158,7 @@ stages:
                 -aksNodeCount $(aksNodeCount)
                 -aksNodeVMSize $(aksNodeVMSize)
                 -maxPods $(maxPods)
+                -outboundIpCount 2
                 #-aksServicePrincipalObjectId $(aksServicePrincipalObjectId)
                 #-aksServicePrincipalAppId $(aksServicePrincipalAppId)
                 #-aksServicePrincipalSecret $(aksServicePrincipalSecret)
@@ -189,7 +190,7 @@ stages:
               azureSubscription: $(serviceConnection)
               scriptLocation: scriptPath
               scriptPath: ./scripts/install-apps.sh
-- stage: 'devtest'
+- stage: 'test'
   displayName: 'test environment release'
   variables:
     environmentName: test
@@ -242,7 +243,7 @@ stages:
             inputs:
               azureSubscription: $(serviceConnection)
               scriptLocation: 'inlineScript'
-              inlineScript: 'az storage blob upload-batch -d $(containerName) -s ./templates/nested/ --pattern *.json --account-name $(storageAccountName)'
+              inlineScript: 'az storage blob upload-batch -d $(containerName) -s ./infra/templates/nested/ --pattern *.json --account-name $(storageAccountName)'
           - task: AzureResourceGroupDeployment@2
             name: 'deployResources'
             displayName: 'Deploy resources'
@@ -252,7 +253,7 @@ stages:
               azureSubscription: $(serviceConnection)
               resourceGroupName: $(resourceGroupName)
               csmFile: ./templates/azuredeploy.json
-              csmParametersFile: ./templates/azuredeploy.parameters.json
+              csmParametersFile: ./infra/templates/azuredeploy.parameters.json
               location: $(location)
               templateLocation: Linked artifact
               deploymentMode: Incremental
@@ -266,9 +267,10 @@ stages:
                 -aksNodeCount $(aksNodeCount)
                 -aksNodeVMSize $(aksNodeVMSize)
                 -maxPods $(maxPods)
-                -aksServicePrincipalObjectId $(aksServicePrincipalObjectId)
-                -aksServicePrincipalAppId $(aksServicePrincipalAppId)
-                -aksServicePrincipalSecret $(aksServicePrincipalSecret)
+                -outboundIpCount 2
+                #-aksServicePrincipalObjectId $(aksServicePrincipalObjectId)
+                #-aksServicePrincipalAppId $(aksServicePrincipalAppId)
+                #-aksServicePrincipalSecret $(aksServicePrincipalSecret)
           - task: ARM Outputs@5
             name: 'GetResourceDeploymentOutput'
             displayName: 'Get ARM Resource Deployment Output'
