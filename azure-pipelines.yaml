@@ -89,7 +89,7 @@ stages:
             scriptLocation: inlineScript
             inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/order/Dockerfile ./api/order
 
-    - job: 'angular-ui_container_build_job'
+    - job: 'angular_container_build_job'
       pool:
         vmImage: 'ubuntu-latest'
       steps:
