@@ -80,7 +80,7 @@ stages:
     - job: 'product_api_container_build_job'
       dependsOn: 'acr_create_job'
       variables:
-        registryName: $[ dependencies.deployACR.outputs['ACRDeploymentOutput.registryName'] ]
+        acrName: $[dependencies.acr_create_job.outputs['acr_job_output.acrName']]
       pool:
         vmImage: 'ubuntu-latest'
       steps:    
@@ -90,12 +90,12 @@ stages:
           inputs:
             azureSubscription: $(serviceConnection)
             scriptLocation: inlineScript
-            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/product/Dockerfile ./api/product
+            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./api/product/Dockerfile ./api/product
 
     - job: 'order_api_container_build_job'
       dependsOn: 'acr_create_job'
       variables:
-        registryName: $[ dependencies.deployACR.outputs['ACRDeploymentOutput.registryName'] ]
+        acrName: $[dependencies.acr_create_job.outputs['acr_job_output.acrName']]
       pool:
         vmImage: 'ubuntu-latest'
       steps:
@@ -105,12 +105,12 @@ stages:
           inputs:
             azureSubscription: $(serviceConnection)
             scriptLocation: inlineScript
-            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/order/Dockerfile ./api/order
+            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./api/order/Dockerfile ./api/order
 
     - job: 'angular_container_build_job'
       dependsOn: 'acr_create_job'
       variables:
-        registryName: $[ dependencies.deployACR.outputs['ACRDeploymentOutput.registryName'] ]
+        acrName: $[dependencies.acr_create_job.outputs['acr_job_output.acrName']]
       pool:
         vmImage: 'ubuntu-latest'
       steps:
@@ -120,7 +120,7 @@ stages:
           inputs:
             azureSubscription: $(serviceConnection)
             scriptLocation: inlineScript
-            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./ui/Dockerfile ./gui
+            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./ui/Dockerfile ./gui
 
 - stage: 'dev'
   displayName: 'dev release'
