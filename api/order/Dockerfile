@@ -1,11 +1,13 @@
 # build image
 FROM golang:alpine as builder
 RUN apk update && apk add --no-cache git
-WORKDIR /
 ENV GO111MODULE=on
+WORKDIR /app
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
 COPY . .
-RUN go get -d -v \
-  && GOOS=linux CGO_ENABLED=0 go build -a -installsuffix cgo -o orderservice .
+RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o orderservice
 
 # release image
 FROM alpine:latest  
