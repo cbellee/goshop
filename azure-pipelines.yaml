@@ -22,9 +22,8 @@ variables:
 stages:
 - stage: 'build'
   displayName: 'build stage'
-  
   jobs:
-    - job: 'prerequisite_resource_job'
+    - job: 'container_build_job'
       pool:
         vmImage: 'ubuntu-latest'
       steps:
@@ -54,33 +53,29 @@ stages:
             whenLastDeploymentIsFailed: 'fail'
             deploymentNameFilter: "acrDeployment-$(timeStamp)"
 
-    - job: 'build_job'
-      pool:
-        vmImage: 'ubuntu-latest'
-      steps:
         - task: AzureCLI@1
           displayName: 'Build customer api container images in ACR'
           enabled: true
           inputs:
             azureSubscription: $(serviceConnection)
-            scriptLocation: 'inlineScript'
-            inlineScript: 'az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/customer/Dockerfile .'
+            scriptLocation: inlineScript
+            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/customer/Dockerfile .
         
         - task: AzureCLI@1
           displayName: 'Build product api container images in ACR'
           enabled: true
           inputs:
             azureSubscription: $(serviceConnection)
-            scriptLocation: 'inlineScript'
-            inlineScript: 'az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/product/Dockerfile .'
+            scriptLocation: inlineScript
+            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/product/Dockerfile .
 
         - task: AzureCLI@1
           displayName: 'Build order api container images in ACR'
           enabled: true
           inputs:
             azureSubscription: $(serviceConnection)
-            scriptLocation: 'inlineScript'
-            inlineScript: 'az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/order/Dockerfile .'
+            scriptLocation: inlineScript
+            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/order/Dockerfile .
 
         - task: NodeTool@0
           name: node_install
@@ -96,7 +91,7 @@ stages:
           name: node_install_build
 
 - stage: 'dev'
-  displayName: 'dev environment release'
+  displayName: 'dev release'
   variables:
     environmentName: dev
     projectName: $(environmentName)-aks
