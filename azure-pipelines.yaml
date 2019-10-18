@@ -59,7 +59,7 @@ stages:
           inputs:
             azureSubscription: $(serviceConnection)
             scriptLocation: inlineScript
-            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/customer/Dockerfile .
+            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/customer/Dockerfile ./api/customer
         
         - task: AzureCLI@1
           displayName: 'Build product api container images in ACR'
@@ -67,7 +67,7 @@ stages:
           inputs:
             azureSubscription: $(serviceConnection)
             scriptLocation: inlineScript
-            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/product/Dockerfile .
+            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/product/Dockerfile ./api/product
 
         - task: AzureCLI@1
           displayName: 'Build order api container images in ACR'
@@ -75,7 +75,7 @@ stages:
           inputs:
             azureSubscription: $(serviceConnection)
             scriptLocation: inlineScript
-            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/order/Dockerfile .
+            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/order/Dockerfile ./api/order
 
         - task: NodeTool@0
           name: node_install
