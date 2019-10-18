@@ -60,6 +60,12 @@ stages:
       pool:
         vmImage: 'ubuntu-latest'
       steps:
+        - task: PowerShell@2
+          inputs:
+            targetType: inline
+            script: |
+              dir env:
+          
         - task: AzureCLI@1
           displayName: 'Build customer api container image in ACR'
           enabled: true
