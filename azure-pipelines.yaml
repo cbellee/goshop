@@ -20,8 +20,8 @@ variables:
   aksNodeVMSize: Standard_F2s_v2
 
 stages:
-- stage: 'prerequisite_resources'
-  displayName: 'prerequisite resources'
+- stage: 'build'
+  displayName: 'build stage'
   
   jobs:
     - job: 'prerequisite_resource_job'
@@ -54,6 +54,10 @@ stages:
             whenLastDeploymentIsFailed: 'fail'
             deploymentNameFilter: "acrDeployment-$(timeStamp)"
 
+    - job: 'build_job'
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
         - task: AzureCLI@1
           displayName: 'Build customer api container images in ACR'
           enabled: true
@@ -78,6 +82,19 @@ stages:
             scriptLocation: 'inlineScript'
             inlineScript: 'az acr build --image $(Build.Repository.Name) --registry $(registryName) --file ./api/order/Dockerfile .'
 
+        - task: NodeTool@0
+          name: node_install
+          inputs:
+            versionSpec: '10.x'
+          displayName: 'Install Node.js'
+
+        - script: |
+              npm install -g @angular/cli
+              npm install
+              ng build --prod
+          displayName: 'npm install and build'
+          name: node_install_build
+
 - stage: 'dev'
   displayName: 'dev environment release'
   variables:
@@ -97,7 +114,7 @@ stages:
           - task: PowerShell@2
             inputs:
               targetType: 'inline'
-              script: 
+              script: |
                 $now = Get-Date
                 $sasTokenExpiry = $now.AddHours(2).ToString('u') -replace ' ','T'
                 Write-Host "##vso[task.setvariable variable=sasTokenExpiry;]$sasTokenExpiry"
