@@ -187,7 +187,7 @@ stages:
               azureSubscription: $(serviceConnection)
               resourceGroupName: $(resourceGroupName)
               csmFile: ./templates/azuredeploy.json
-              csmParametersFile: ./templates/azuredeploy.parameters.json
+              csmParametersFile: ./infra/templates/azuredeploy.parameters.json
               location: $(location)
               templateLocation: Linked artifact
               deploymentMode: Incremental
@@ -215,6 +215,7 @@ stages:
               resourceGroupName: $(resourceGroupName)
               whenLastDeploymentIsFailed: 'fail'
               deploymentNameFilter: "resourceDeployment-$(timeStamp)"
+              
           - task: HelmInstaller@1
             displayName: 'Install Helm'
             enabled: false
@@ -263,7 +264,7 @@ stages:
               action: Create Or Update Resource Group
               azureSubscription: $(serviceConnection)
               resourceGroupName: $(resourceGroupName)
-              csmFile: ./templates/nested/storage.json
+              csmFile: ./infra/templates/nested/storage.json
               location: $(location)
               templateLocation: Linked artifact
               deploymentMode: Incremental
