@@ -1,7 +1,7 @@
 # build image
 FROM golang:alpine as builder
 RUN apk update && apk add --no-cache git
-WORKDIR /go/src/github.com/cbellee/goShop-productService
+#WORKDIR /
 ENV GO111MODULE=on
 COPY . .
 RUN go get -d -v \
@@ -12,8 +12,8 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates \
   && mkdir /app
 WORKDIR /app
-COPY --from=builder /go/src/github.com/cbellee/goShop-productService/productservice .
-COPY --from=builder /go/src/github.com/cbellee/goShop-productService/seed_data.json .
+COPY --from=builder /productservice .
+COPY --from=builder /seed_data.json .
 
 # Metadata params
 ARG VERSION
