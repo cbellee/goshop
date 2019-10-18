@@ -120,7 +120,7 @@ stages:
           inputs:
             azureSubscription: $(serviceConnection)
             scriptLocation: inlineScript
-            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./ui/Dockerfile ./gui
+            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./ui/Dockerfile ./ui
 
 - stage: 'dev'
   displayName: 'dev release'
