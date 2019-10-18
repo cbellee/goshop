@@ -1,19 +1,21 @@
 # build image
 FROM golang:alpine as builder
 RUN apk update && apk add --no-cache git
-WORKDIR /
 ENV GO111MODULE=on
+WORKDIR /app
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
 COPY . .
-RUN go get -d -v \
-  && GOOS=linux CGO_ENABLED=0 go build -a -installsuffix cgo -o productservice .
+RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o productservice
 
 # release image
 FROM alpine:latest  
 RUN apk --no-cache add ca-certificates \
   && mkdir /app
 WORKDIR /app
-COPY --from=builder /productservice .
-COPY --from=builder /seed_data.json .
+COPY --from=builder /app/productservice .
+COPY --from=builder /app/seed_data.json .
 
 # Metadata params
 ARG VERSION
