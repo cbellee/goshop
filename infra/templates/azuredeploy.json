@@ -36,8 +36,8 @@
         "maxPods": {
             "type": "int",
             "defaultValue": 50
-        },
-        "aksServicePrincipalAppId": {
+        }
+        /*         "aksServicePrincipalAppId": {
             "type": "string"
         },
         "aksServicePrincipalSecret": {
@@ -45,7 +45,7 @@
         },
         "aksServicePrincipalObjectId": {
             "type": "string"
-        }
+        } */
     },
     "variables": {
         "resgpguid": "[substring(replace(guid(resourceGroup().id), '-', ''), 0, 6)]"
@@ -56,7 +56,8 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2018-05-01",
             "comments": "This deployment links to the gatewayVpn nested ARM template",
-            "dependsOn": [],
+            "dependsOn": [
+            ],
             "condition": true,
             "resourceGroup": "[resourceGroup().name]",
             "copy": {
@@ -120,7 +121,10 @@
                     "aksSubnetName": {
                         "value": "[reference('Microsoft.Resources/deployments/linkedTemplate-vnet-0').outputs.subnetRefs.value[0].name]"
                     },
-                    "aksServicePrincipalAppId": {
+                    "outboundIpCount": {
+                        "value": 2
+                    }
+                    /*                     "aksServicePrincipalAppId": {
                         "value": "[parameters('aksServicePrincipalAppId')]"
                     },
                     "aksServicePrincipalSecret": {
@@ -128,7 +132,7 @@
                     },
                     "aksServicePrincipalObjectId": {
                         "value": "[parameters('aksServicePrincipalObjectId')]"
-                    }
+                    } */
                 }
             }
         }

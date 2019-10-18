@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "aksServicePrincipalAppId": {
+/*         "aksServicePrincipalAppId": {
             "type": "string",
             "metadata": {
                 "description": "Application ID/Client ID  of the service principal. Used by AKS to manage AKS related resources on Azure like vms, subnets."
@@ -19,7 +19,7 @@
             "metadata": {
                 "description": "Object ID of the service principal."
             }
-        },
+        }, */
         "aksDnsPrefix": {
             "defaultValue": "aks",
             "type": "string",
@@ -311,12 +311,6 @@
             }
         },
         "aksSubnetId": {
-            "type": "string"
-        },
-        "aksVnetName": {
-            "type": "string"
-        },
-        "aksSubnetName": {
             "type": "string"
         },
         "suffix": {

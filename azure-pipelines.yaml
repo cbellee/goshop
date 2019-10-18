@@ -12,12 +12,12 @@ variables:
   acrResourceGroupName: $(project)-acr-rg
   containerName: 'templates'
   timeStamp: $[format('{0:yyyy}-{0:MM}-{0:dd}-{0:HHmmss}', pipeline.startTime)]
-  aksVersion: 1.14.6
+  aksVersion: 1.14.7
   aksNodeCount: 1
   maxPods: 50
   aksMinNodeCount: 1
   aksMaxNodeCount: 5
-  aksNodeVMSize: Standard_F2s
+  aksNodeVMSize: Standard_F2s_v2
 
 stages:
 - stage: 'prerequisite_resources'
@@ -97,7 +97,7 @@ stages:
           - task: PowerShell@2
             inputs:
               targetType: 'inline'
-              script: |
+              script: 
                 $now = Get-Date
                 $sasTokenExpiry = $now.AddHours(2).ToString('u') -replace ' ','T'
                 Write-Host "##vso[task.setvariable variable=sasTokenExpiry;]$sasTokenExpiry"
@@ -109,7 +109,7 @@ stages:
               action: Create Or Update Resource Group
               azureSubscription: $(serviceConnection)
               resourceGroupName: $(resourceGroupName)
-              csmFile: ./templates/nested/storage.json
+              csmFile: ./infra/templates/nested/storage.json
               location: $(location)
               templateLocation: Linked artifact
               deploymentMode: Incremental
@@ -133,7 +133,7 @@ stages:
             inputs:
               azureSubscription: $(serviceConnection)
               scriptLocation: 'inlineScript'
-              inlineScript: 'az storage blob upload-batch -d $(containerName) -s ./templates/nested/ --pattern *.json --account-name $(storageAccountName)'
+              inlineScript: 'az storage blob upload-batch -d $(containerName) -s ./infra/templates/nested/ --pattern *.json --account-name $(storageAccountName)'
       
           - task: AzureResourceGroupDeployment@2
             name: 'deployResources'
@@ -158,9 +158,9 @@ stages:
                 -aksNodeCount $(aksNodeCount)
                 -aksNodeVMSize $(aksNodeVMSize)
                 -maxPods $(maxPods)
-                -aksServicePrincipalObjectId $(aksServicePrincipalObjectId)
-                -aksServicePrincipalAppId $(aksServicePrincipalAppId)
-                -aksServicePrincipalSecret $(aksServicePrincipalSecret)
+                #-aksServicePrincipalObjectId $(aksServicePrincipalObjectId)
+                #-aksServicePrincipalAppId $(aksServicePrincipalAppId)
+                #-aksServicePrincipalSecret $(aksServicePrincipalSecret)
           - task: ARM Outputs@5
             name: 'GetResourceDeploymentOutput'
             displayName: 'Get ARM Resource Deployment Output'
