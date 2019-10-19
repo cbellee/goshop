@@ -1,5 +1,8 @@
 name: order_service_CI
 
+variables:
+- group: goshop-variable-group
+
 trigger:
   paths:
     include:
