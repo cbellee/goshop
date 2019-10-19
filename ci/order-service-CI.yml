@@ -16,7 +16,7 @@ stages:
           vmImage: 'ubuntu-latest'
         steps:          
           - task: AzureCLI@1
-            displayName: 'Build customer api container image in ACR'
+            displayName: 'Build order api container image in ACR'
             enabled: true
             inputs:
               azureSubscription: $(serviceConnection)
