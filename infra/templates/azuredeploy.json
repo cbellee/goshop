@@ -130,15 +130,15 @@
                     "aksSubnetId": {
                         "value": "[reference('Microsoft.Resources/deployments/linkedTemplate-vnet-0').outputs.subnetRefs.value[0].id]"
                     },
-                    "aksVnetName": {
+                   /*  "aksVnetName": {
                         "value": "[concat(parameters('vNets')[0].name, '-', variables('resgpguid'))]"
-                    },
+                    }, */
                     "aksNodeVMSize": {
                         "value": "[parameters('aksNodeVMSize')]"
                     },
-                    "aksSubnetName": {
+/*                     "aksSubnetName": {
                         "value": "[reference('Microsoft.Resources/deployments/linkedTemplate-vnet-0').outputs.subnetRefs.value[0].name]"
-                    },
+                    }, */
                     "outboundIpCount": {
                         "value": 2
                     }
