@@ -3,7 +3,15 @@
 name: deployAzureResources
 
 trigger:
-- master
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - ./api/customer
+      - ./api/order
+      - ./api/product
+      - ./ui
 
 variables:
   serviceConnection: 'Azure CXP FTA Internal Subscription CBELLEE (b2375b5f-8dab-4436-b87c-32bc7fdce5d0)'

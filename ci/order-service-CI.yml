@@ -1,0 +1,25 @@
+name: order_service_CI
+
+trigger:
+  paths:
+    include:
+      - ./api/order
+
+stages:
+  - stage: 
+    condition: 
+    jobs:
+      - job: 'order_api_container_build_job'
+        #dependsOn: 'acr_create_job'
+          #acrName: $[dependencies.acr_create_job.outputs['acr_job_output.acrName']]
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:          
+          - task: AzureCLI@1
+            displayName: 'Build customer api container image in ACR'
+            enabled: true
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptLocation: inlineScript
+              inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./api/order/Dockerfile ./api/order
+  
