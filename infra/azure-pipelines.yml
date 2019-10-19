@@ -74,7 +74,7 @@ stages:
                         location: $(location)
                         templateLocation: 'Linked artifact'
                         csmFile: $(Agent.BuildDirectory)/drop/templates/azuredeploy.json
-                        overrideParameters: '-aksServicePrincipalAppId $(aksServicePrincipalAppId) -aksServicePrincipalClientSecret $(aksServicePrincipalClientSecret) -aksServicePrincipalObjectId $(aksServicePrincipalObjectId) -kubernetesVersion $(kubernetesVersion) -isDeployApplicationGateway $(isDeployApplicationGateway)'
+                        overrideParameters: '-aksServicePrincipalAppId $(aksServicePrincipalAppId) -kubernetesVersion $(kubernetesVersion) -isDeployApplicationGateway $(isDeployApplicationGateway)'
                         csmParametersFile: $(Agent.BuildDirectory)/drop/templates/azuredeploy.parameters.json
                         deploymentMode: 'Incremental'
 
@@ -148,7 +148,7 @@ stages:
                         location: $(location)
                         templateLocation: 'Linked artifact'
                         csmFile: $(Agent.BuildDirectory)/drop/templates/azuredeploy.json
-                        overrideParameters: '-aksServicePrincipalAppId $(aksServicePrincipalAppId) -aksServicePrincipalClientSecret $(aksServicePrincipalClientSecret) -aksServicePrincipalObjectId $(aksServicePrincipalObjectId) -kubernetesVersion $(kubernetesVersion) -isDeployApplicationGateway $(isDeployApplicationGateway)'
+                        overrideParameters: '-aksServicePrincipalAppId $(aksServicePrincipalAppId) -kubernetesVersion $(kubernetesVersion) -isDeployApplicationGateway $(isDeployApplicationGateway)'
                         csmParametersFile: '$(Agent.BuildDirectory)/drop/templates/azuredeploy.parameters.json'
                         deploymentMode: 'Incremental'
                     - task: ARM Outputs@5

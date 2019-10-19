@@ -6,7 +6,7 @@
             "type": "bool",
             "defaultValue": true
         },
-        "aksServicePrincipalAppId": {
+/*         "aksServicePrincipalAppId": {
             "type": "string",
             "metadata": {
                 "description": "Application ID/Client ID  of the service principal. Used by AKS to manage AKS related resources on Azure like vms, subnets."
@@ -23,7 +23,7 @@
             "metadata": {
                 "description": "Object ID of the service principal."
             }
-        },
+        }, */
         "aksMinAgentCount": {
             "type": "int",
             "defaultValue": 1
@@ -812,10 +812,10 @@
                         "enableAutoscaling": "[parameters('enableAutoScaling')]"
                     }
                 ],
-                "servicePrincipalProfile": {
+/*                 "servicePrincipalProfile": {
                     "clientId": "[parameters('aksServicePrincipalAppId')]",
                     "secret": "[parameters('aksServicePrincipalClientSecret')]"
-                },
+                }, */
                 "networkProfile": {
                     "networkPlugin": "azure",
                     "serviceCidr": "[parameters('aksServiceCIDR')]",
