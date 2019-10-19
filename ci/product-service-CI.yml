@@ -19,7 +19,7 @@ stages:
             displayName: 'Build product api container image in ACR'
             enabled: true
             inputs:
-              azureSubscription: $(serviceConnection)
+              azureSubscription: 'Azure CXP FTA Internal Subscription CBELLEE (b2375b5f-8dab-4436-b87c-32bc7fdce5d0)'
               scriptLocation: inlineScript
               inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./api/product/Dockerfile ./api/product
   
