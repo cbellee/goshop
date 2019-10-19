@@ -202,9 +202,9 @@ stages:
                 -aksMaxNodeCount 5
                 -maxPods $(maxPods)
                 -outboundIpCount 2
-                #-aksServicePrincipalObjectId $(aksServicePrincipalObjectId)
-                #-aksServicePrincipalAppId $(aksServicePrincipalAppId)
-                #-aksServicePrincipalSecret $(aksServicePrincipalSecret)
+                -aksServicePrincipalObjectId $(aksServicePrincipalObjectId)
+                -aksServicePrincipalAppId $(aksServicePrincipalAppId)
+                -aksServicePrincipalSecret $(aksServicePrincipalSecret)
           - task: ARM Outputs@5
             name: 'GetResourceDeploymentOutput'
             displayName: 'Get ARM Resource Deployment Output'
@@ -312,9 +312,9 @@ stages:
                 -aksNodeVMSize $(aksNodeVMSize)
                 -maxPods $(maxPods)
                 -outboundIpCount 2
-                #-aksServicePrincipalObjectId $(aksServicePrincipalObjectId)
-                #-aksServicePrincipalAppId $(aksServicePrincipalAppId)
-                #-aksServicePrincipalSecret $(aksServicePrincipalSecret)
+                -aksServicePrincipalObjectId $(aksServicePrincipalObjectId)
+                -aksServicePrincipalAppId $(aksServicePrincipalAppId)
+                -aksServicePrincipalSecret $(aksServicePrincipalSecret)
           - task: ARM Outputs@5
             name: 'GetResourceDeploymentOutput'
             displayName: 'Get ARM Resource Deployment Output'
