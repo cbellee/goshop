@@ -29,6 +29,14 @@
             "type": "int",
             "defaultValue": 3
         },
+        "aksMinNodeCount": {
+            "type": "int",
+            "defaultValue": 1
+        },
+        "aksMaxNodeCount": {
+            "type": "int",
+            "defaultValue": 5
+        },
         "aksNodeVMSize": {
             "type": "string",
             "defaultValue": "Standard_D4s_v3"
@@ -36,6 +44,10 @@
         "maxPods": {
             "type": "int",
             "defaultValue": 50
+        },
+        "outboundIpCount": {
+            "type": "int",
+            "defaultValue": 2
         }
         /*         "aksServicePrincipalAppId": {
             "type": "string"
@@ -103,8 +115,14 @@
                     "aksVersion": {
                         "value": "[parameters('aksVersion')]"
                     },
+                    "aksMinNodeCount": {
+                        "value": "[parameters('aksMinNodeCount')]"
+                    },
                     "aksNodeCount": {
                         "value": "[parameters('aksNodeCount')]"
+                    },
+                    "aksMaxNodeCount": {
+                        "value": "[parameters('aksMaxNodeCount')]"
                     },
                     "maxPods": {
                         "value": "[parameters('maxPods')]"

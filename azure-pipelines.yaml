@@ -196,6 +196,8 @@ stages:
                 -aksVersion $(aksVersion)
                 -aksNodeCount $(aksNodeCount)
                 -aksNodeVMSize $(aksNodeVMSize)
+                -aksMinNodeCount 1
+                -aksMaxNodeCount 5
                 -maxPods $(maxPods)
                 -outboundIpCount 2
                 #-aksServicePrincipalObjectId $(aksServicePrincipalObjectId)
