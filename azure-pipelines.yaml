@@ -196,11 +196,11 @@ stages:
                 -storageUri $(storageContainerUri)
                 -sasToken $(storageAccountSasToken)
                 -aksVersion $(aksVersion)
-                -aksNodeCount $(aksNodeCount)
+                -aksNodeCount 1
                 -aksNodeVMSize $(aksNodeVMSize)
                 -aksMinNodeCount 1
                 -aksMaxNodeCount 5
-                -maxPods $(maxPods)
+                -maxPods 50
                 -outboundIpCount 2
                 -aksServicePrincipalObjectId $(aksServicePrincipalObjectId)
                 -aksServicePrincipalAppId $(aksServicePrincipalAppId)
@@ -308,9 +308,9 @@ stages:
                 -storageUri $(storageContainerUri)
                 -sasToken $(storageAccountSasToken)
                 -aksVersion $(aksVersion)
-                -aksNodeCount $(aksNodeCount)
+                -aksNodeCount 1
                 -aksNodeVMSize $(aksNodeVMSize)
-                -maxPods $(maxPods)
+                -maxPods 50
                 -outboundIpCount 2
                 -aksServicePrincipalObjectId $(aksServicePrincipalObjectId)
                 -aksServicePrincipalAppId $(aksServicePrincipalAppId)
