@@ -21,5 +21,5 @@ stages:
             inputs:
               azureSubscription: 'Azure CXP FTA Internal Subscription CBELLEE (b2375b5f-8dab-4436-b87c-32bc7fdce5d0)'
               scriptLocation: inlineScript
-              inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./api/customer/Dockerfile ./api/customer
+              inlineScript: az acr build --image $(Build.Repository.Name)_customer:$(Build.SourceVersion) --registry $(acrName) --file ./api/customer/Dockerfile ./api/customer
   
