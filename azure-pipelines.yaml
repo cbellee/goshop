@@ -18,6 +18,7 @@ variables:
   aksMinNodeCount: 1
   aksMaxNodeCount: 5
   aksNodeVMSize: Standard_F2s_v2
+  armTemplatePath: ./infra/templates
 
 stages:
 - stage: 'build'
@@ -35,7 +36,7 @@ stages:
             action: Create Or Update Resource Group
             azureSubscription: $(serviceConnection)
             resourceGroupName: $(acrResourceGroupName)
-            csmFile: ./infra/templates/nested/acr.json
+            csmFile: $(armTemplatePath)/nested/acr.json
             location: $(location)
             templateLocation: Linked artifact
             deploymentMode: Incremental
@@ -62,13 +63,7 @@ stages:
         acrName: $[dependencies.acr_create_job.outputs['acr_job_output.acrName']]
       pool:
         vmImage: 'ubuntu-latest'
-      steps:
-        - task: PowerShell@2
-          inputs:
-            targetType: inline
-            script: |
-              dir env:
-          
+      steps:          
         - task: AzureCLI@1
           displayName: 'Build customer api container image in ACR'
           enabled: true
@@ -153,7 +148,7 @@ stages:
               action: Create Or Update Resource Group
               azureSubscription: $(serviceConnection)
               resourceGroupName: $(resourceGroupName)
-              csmFile: ./infra/templates/nested/storage.json
+              csmFile: $(armTemplatePath)/nested/storage.json
               location: $(location)
               templateLocation: Linked artifact
               deploymentMode: Incremental
@@ -177,7 +172,7 @@ stages:
             inputs:
               azureSubscription: $(serviceConnection)
               scriptLocation: 'inlineScript'
-              inlineScript: 'az storage blob upload-batch -d $(containerName) -s ./infra/templates/nested/ --pattern *.json --account-name $(storageAccountName)'
+              inlineScript: 'az storage blob upload-batch -d $(containerName) -s $(armTemplatePath)/nested/ --pattern *.json --account-name $(storageAccountName)'
       
           - task: AzureResourceGroupDeployment@2
             name: 'deployResources'
@@ -187,8 +182,8 @@ stages:
               action: Create Or Update Resource Group
               azureSubscription: $(serviceConnection)
               resourceGroupName: $(resourceGroupName)
-              csmFile: ./templates/azuredeploy.json
-              csmParametersFile: ./infra/templates/azuredeploy.parameters.json
+              csmFile: $(armTemplatePath)/azuredeploy.json
+              csmParametersFile: $(armTemplatePath)/azuredeploy.parameters.json
               location: $(location)
               templateLocation: Linked artifact
               deploymentMode: Incremental
@@ -266,7 +261,7 @@ stages:
               action: Create Or Update Resource Group
               azureSubscription: $(serviceConnection)
               resourceGroupName: $(resourceGroupName)
-              csmFile: ./infra/templates/nested/storage.json
+              csmFile: $(armTemplatePath)/nested/storage.json
               location: $(location)
               templateLocation: Linked artifact
               deploymentMode: Incremental
@@ -288,7 +283,7 @@ stages:
             inputs:
               azureSubscription: $(serviceConnection)
               scriptLocation: 'inlineScript'
-              inlineScript: 'az storage blob upload-batch -d $(containerName) -s ./infra/templates/nested/ --pattern *.json --account-name $(storageAccountName)'
+              inlineScript: 'az storage blob upload-batch -d $(containerName) -s $(armTemplatePath)/nested/ --pattern *.json --account-name $(storageAccountName)'
           - task: AzureResourceGroupDeployment@2
             name: 'deployResources'
             displayName: 'Deploy resources'
@@ -297,8 +292,8 @@ stages:
               action: Create Or Update Resource Group
               azureSubscription: $(serviceConnection)
               resourceGroupName: $(resourceGroupName)
-              csmFile: ./templates/azuredeploy.json
-              csmParametersFile: ./infra/templates/azuredeploy.parameters.json
+              csmFile: $(armTemplatePath)/azuredeploy.json
+              csmParametersFile: $(armTemplatePath)/azuredeploy.parameters.json
               location: $(location)
               templateLocation: Linked artifact
               deploymentMode: Incremental
