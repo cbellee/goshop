@@ -49,6 +49,12 @@
         },
         "outboundIpCount": {
             "value": 2
+        },
+        "aksMinNodeCount": {
+            "value": 1
+        },
+        "aksMaxNodeCount": {
+            "value": 5
         }
         /*  "aksServicePrincipalAppId": {
             "value": null

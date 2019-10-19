@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-/*         "aksServicePrincipalAppId": {
+        /*         "aksServicePrincipalAppId": {
             "type": "string",
             "metadata": {
                 "description": "Application ID/Client ID  of the service principal. Used by AKS to manage AKS related resources on Azure like vms, subnets."
@@ -477,7 +477,7 @@
                         "maxPods": "[parameters('maxPods')]"
                     }
                 ],
-/*                 "servicePrincipalProfile": {
+                /*                 "servicePrincipalProfile": {
                     "clientId": "[parameters('aksServicePrincipalAppId')]",
                     "secret": "[parameters('aksServicePrincipalSecret')]"
                 }, */
@@ -486,7 +486,7 @@
                     "serviceCidr": "[parameters('aksServiceCIDR')]",
                     "dnsServiceIP": "[parameters('aksDnsServiceIP')]",
                     "dockerBridgeCidr": "[parameters('aksDockerBridgeCIDR')]",
-                    "loadBalancerSku": "Standard",
+                    "loadBalancerSku": "Standard"
                 },
                 "loadBalancerProfile": {
                     "managedOutboundIPs": {
