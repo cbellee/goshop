@@ -19,6 +19,8 @@ variables:
   aksMaxNodeCount: 5
   aksNodeVMSize: Standard_F2s_v2
   armTemplatePath: ./infra/templates
+  aksServicePrincipalAppId: de3ef06a-2824-4dce-b714-65ba1b5e0744
+  aksServicePrincipalObjectId: d37981d6-bc89-4019-8c51-96a111f0bf62
 
 stages:
 - stage: 'build'
