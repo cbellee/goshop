@@ -1,12 +1,12 @@
 name: product_service_CI
 
-variables:
-- group: goshop-variable-group
-
 trigger:
   paths:
     include:
       - ./api/product
+
+variables:
+- group: goshop-variable-group
 
 stages:
   - stage: 

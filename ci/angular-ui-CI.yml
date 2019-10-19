@@ -5,6 +5,9 @@ trigger:
     include:
       - ./api/ui
 
+variables:
+- group: goshop-variable-group
+
 stages:
   - stage: 
     condition: 
