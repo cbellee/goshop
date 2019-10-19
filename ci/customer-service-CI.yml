@@ -4,7 +4,7 @@ trigger:
   paths:
     include:
       - ./api/customer
-      
+
 variables:
 - group: goshop-variable-group
 
@@ -22,7 +22,7 @@ stages:
             displayName: 'Build customer api container image in ACR'
             enabled: true
             inputs:
-              azureSubscription: 'Azure CXP FTA Internal Subscription CBELLEE (b2375b5f-8dab-4436-b87c-32bc7fdce5d0)'
+              azureSubscription: $(serviceEndpoint)
               scriptLocation: inlineScript
               inlineScript: az acr build --image $(Build.Repository.Name)_customer:$(Build.SourceVersion) --registry $(acrName) --file ./api/customer/Dockerfile ./api/customer
   
