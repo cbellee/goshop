@@ -48,8 +48,8 @@
         "outboundIpCount": {
             "type": "int",
             "defaultValue": 2
-        }
-        /*         "aksServicePrincipalAppId": {
+        },
+        "aksServicePrincipalAppId": {
             "type": "string"
         },
         "aksServicePrincipalSecret": {
@@ -57,7 +57,7 @@
         },
         "aksServicePrincipalObjectId": {
             "type": "string"
-        } */
+        }
     },
     "variables": {
         "resgpguid": "[substring(replace(guid(resourceGroup().id), '-', ''), 0, 6)]"
@@ -130,19 +130,19 @@
                     "aksSubnetId": {
                         "value": "[reference('Microsoft.Resources/deployments/linkedTemplate-vnet-0').outputs.subnetRefs.value[0].id]"
                     },
-                   /*  "aksVnetName": {
+                    /*  "aksVnetName": {
                         "value": "[concat(parameters('vNets')[0].name, '-', variables('resgpguid'))]"
                     }, */
                     "aksNodeVMSize": {
                         "value": "[parameters('aksNodeVMSize')]"
                     },
-/*                     "aksSubnetName": {
+                    /*                     "aksSubnetName": {
                         "value": "[reference('Microsoft.Resources/deployments/linkedTemplate-vnet-0').outputs.subnetRefs.value[0].name]"
                     }, */
                     "outboundIpCount": {
-                        "value": 2
-                    }
-                    /*                     "aksServicePrincipalAppId": {
+                        "value": "[parameters('outboundIpCount')]"
+                    },
+                    "aksServicePrincipalAppId": {
                         "value": "[parameters('aksServicePrincipalAppId')]"
                     },
                     "aksServicePrincipalSecret": {
@@ -150,7 +150,7 @@
                     },
                     "aksServicePrincipalObjectId": {
                         "value": "[parameters('aksServicePrincipalObjectId')]"
-                    } */
+                    }
                 }
             }
         }

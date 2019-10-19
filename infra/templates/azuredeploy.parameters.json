@@ -55,8 +55,8 @@
         },
         "aksMaxNodeCount": {
             "value": 5
-        }
-        /*  "aksServicePrincipalAppId": {
+        },
+        "aksServicePrincipalAppId": {
             "value": null
         },
         "aksServicePrincipalSecret": {
@@ -64,6 +64,6 @@
         },
         "aksServicePrincipalObjectId": {
             "value": null
-        } */
+        }
     }
 }
