@@ -1,9 +1,9 @@
-name: product_service_CI
+name: customer_api_CI
 
 trigger:
   paths:
     include:
-      - ./api/product
+      - ./api/customer
 
 variables:
 - group: goshop-variable-group
@@ -12,17 +12,17 @@ stages:
   - stage: 
     condition: 
     jobs:
-      - job: 'product_api_container_build_job'
+      - job: 'customer_api_container_build_job'
         #dependsOn: 'acr_create_job'
           #acrName: $[dependencies.acr_create_job.outputs['acr_job_output.acrName']]
         pool:
           vmImage: 'ubuntu-latest'
         steps:          
           - task: AzureCLI@1
-            displayName: 'Build product api container image in ACR'
+            displayName: 'Build customer api container image in ACR'
             enabled: true
             inputs:
               azureSubscription: $(serviceEndpoint)
               scriptLocation: inlineScript
-              inlineScript: az acr build --image $(Build.Repository.Name)_product:$(Build.SourceVersion) --registry $(acrName) --file ./api/product/Dockerfile ./api/product
+              inlineScript: az acr build --image $(Build.Repository.Name)_customer_api:$(Build.SourceVersion) --registry $(acrName) --file ./api/customer/Dockerfile ./api/customer
   

@@ -1,4 +1,4 @@
-name: order_service_CI
+name: order_api_CI
 
 trigger:
   paths:
@@ -24,5 +24,5 @@ stages:
             inputs:
               azureSubscription: $(serviceEndpoint)
               scriptLocation: inlineScript
-              inlineScript: az acr build --image $(Build.Repository.Name)_order:$(Build.SourceVersion) --registry $(acrName) --file ./api/order/Dockerfile ./api/order
+              inlineScript: az acr build --image $(Build.Repository.Name)_order_api:$(Build.SourceVersion) --registry $(acrName) --file ./api/order/Dockerfile ./api/order
   
