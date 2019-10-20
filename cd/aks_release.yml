@@ -1,17 +1,13 @@
-# Pipeline to deploy goshop services & infrastructure
+name: aks_release
 
-name: deployAzureResources
-
-trigger:
-  branches:
-    include:
-      - master
-  paths:
-    include:
-      - ./api/customer
-      - ./api/order
-      - ./api/product
-      - ./ui
+resources:
+  pipelines:
+    - pipeline: customer_service_CI_pipeline
+      source: customer_service_CI
+      trigger:
+        branches:
+          include:
+          - master
 
 variables:
   serviceConnection: 'Azure CXP FTA Internal Subscription CBELLEE (b2375b5f-8dab-4436-b87c-32bc7fdce5d0)'
@@ -32,6 +28,7 @@ variables:
 
 stages:
 - stage: 'build'
+  condition: false
   displayName: 'build stage'
   jobs:
     - job: 'acr_create_job'
@@ -66,66 +63,6 @@ stages:
 
         - script:  echo "##vso[task.setvariable variable=acrName;isOutput=true]$(registryName)"
           name: acr_job_output
-
-    - job: 'customer_api_container_build_job'
-      dependsOn: 'acr_create_job'
-      variables:
-        acrName: $[dependencies.acr_create_job.outputs['acr_job_output.acrName']]
-      pool:
-        vmImage: 'ubuntu-latest'
-      steps:          
-        - task: AzureCLI@1
-          displayName: 'Build customer api container image in ACR'
-          enabled: true
-          inputs:
-            azureSubscription: $(serviceConnection)
-            scriptLocation: inlineScript
-            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./api/customer/Dockerfile ./api/customer
-
-    - job: 'product_api_container_build_job'
-      dependsOn: 'acr_create_job'
-      variables:
-        acrName: $[dependencies.acr_create_job.outputs['acr_job_output.acrName']]
-      pool:
-        vmImage: 'ubuntu-latest'
-      steps:    
-        - task: AzureCLI@1
-          displayName: 'Build product api container image in ACR'
-          enabled: true
-          inputs:
-            azureSubscription: $(serviceConnection)
-            scriptLocation: inlineScript
-            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./api/product/Dockerfile ./api/product
-
-    - job: 'order_api_container_build_job'
-      dependsOn: 'acr_create_job'
-      variables:
-        acrName: $[dependencies.acr_create_job.outputs['acr_job_output.acrName']]
-      pool:
-        vmImage: 'ubuntu-latest'
-      steps:
-        - task: AzureCLI@1
-          displayName: 'Build order api container image in ACR'
-          enabled: true
-          inputs:
-            azureSubscription: $(serviceConnection)
-            scriptLocation: inlineScript
-            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./api/order/Dockerfile ./api/order
-
-    - job: 'angular_container_build_job'
-      dependsOn: 'acr_create_job'
-      variables:
-        acrName: $[dependencies.acr_create_job.outputs['acr_job_output.acrName']]
-      pool:
-        vmImage: 'ubuntu-latest'
-      steps:
-        - task: AzureCLI@1
-          displayName: 'Build Angular ui container image in ACR'
-          enabled: true
-          inputs:
-            azureSubscription: $(serviceConnection)
-            scriptLocation: inlineScript
-            inlineScript: az acr build --image $(Build.Repository.Name) --registry $(acrName) --file ./ui/Dockerfile ./ui
 
 - stage: 'dev'
   displayName: 'dev release'
