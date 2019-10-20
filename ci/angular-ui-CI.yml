@@ -1,5 +1,8 @@
 name: angular_ui_CI
 
+variables:
+- group: goshop-variable-group
+
 trigger:
   paths:
     include:
