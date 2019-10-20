@@ -2,8 +2,8 @@ name: aks_release
 
 resources:
   pipelines:
-    - pipeline: customer_service_CI_pipeline
-      source: customer_service_CI
+    - pipeline: customer_api_CI_pipeline
+      source: customer_api_CI
       trigger:
         branches:
           include:
