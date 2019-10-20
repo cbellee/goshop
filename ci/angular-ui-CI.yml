@@ -14,7 +14,7 @@ stages:
           #acrName: $[dependencies.acr_create_job.outputs['acr_job_output.acrName']]
         pool:
           vmImage: 'ubuntu-latest'
-        steps:          
+        steps:
           - task: AzureCLI@1
             displayName: 'Build angular ui container image in ACR'
             enabled: true
