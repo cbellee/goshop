@@ -3,7 +3,7 @@ name: aks_release
 resources:
   pipelines:
     - pipeline: customer_api
-      source: customer_api_CI_
+      source: customer_api_CI
       project: AzureFastTrackCustomerExamples
       branch: master
       trigger:
