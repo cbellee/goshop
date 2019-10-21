@@ -7,9 +7,8 @@ resources:
       project: AzureFastTrackCustomerExamples
       branch: master
       trigger:
-       enabled: true
-       branches:
-        include:
+        branches:
+          include:
           - master
 
 variables:
@@ -30,43 +29,6 @@ variables:
   aksServicePrincipalObjectId: d37981d6-bc89-4019-8c51-96a111f0bf62
 
 stages:
-- stage: 'build'
-  condition: false
-  displayName: 'build stage'
-  jobs:
-    - job: 'acr_create_job'
-      pool:
-        vmImage: 'ubuntu-latest'
-      steps:
-        - task: AzureResourceGroupDeployment@2
-          name: 'deploy_acr'
-          displayName: 'Deploy Azure Container Registry'
-          enabled: true
-          inputs:
-            action: Create Or Update Resource Group
-            azureSubscription: $(serviceConnection)
-            resourceGroupName: $(acrResourceGroupName)
-            csmFile: $(armTemplatePath)/nested/acr.json
-            location: $(location)
-            templateLocation: Linked artifact
-            deploymentMode: Incremental
-            deploymentName: "acrDeployment-$(timeStamp)"
-            outputVariable: acrTemplateOutput
-        
-        - task: ARM Outputs@5
-          name: 'acr_deployment_output'
-          displayName: 'Get ACR Deployment Output'
-          enabled: true
-          inputs:
-            ConnectedServiceNameSelector: 'ConnectedServiceNameARM'
-            ConnectedServiceNameARM: $(serviceConnection)
-            resourceGroupName: $(acrResourceGroupName)
-            whenLastDeploymentIsFailed: 'fail'
-            deploymentNameFilter: "acrDeployment-$(timeStamp)"
-
-        - script:  echo "##vso[task.setvariable variable=acrName;isOutput=true]$(registryName)"
-          name: acr_job_output
-
 - stage: 'dev'
   displayName: 'dev release'
   variables:
